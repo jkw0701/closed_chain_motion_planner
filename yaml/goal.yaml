@@ -1,0 +1,32 @@
+grasp_points :  
+  top :
+    link0 : 
+      - minusY
+    link1 : 
+    link2 : 
+      - minusZ
+      - plusZ
+      - minusX
+    link3 : 
+      - minusZ
+      - plusZ
+      - minusY
+    link4 : 
+      - minusZ
+      - plusX
+
+  bottom :
+    link0 : 
+      - minusY
+    link1 : 
+    link2 : 
+      - minusZ
+      - plusZ
+      - minusX
+    link3 : 
+      - minusZ
+      - plusZ
+      - minusY
+    link4 : 
+      - plusZ
+      - plusX
