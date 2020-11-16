@@ -1,2 +1,1 @@
 # closed_chain_motion_planner
-# closed_chain_motion_planner
