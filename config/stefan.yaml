@@ -1,9 +1,20 @@
+obj_name: stefan
 start_joint: [-0.16661368, -0.7661184, -0.03369873, -2.37254935, -0.09888003 , 1.6927669, 0.17440837, 0.40648265944447426, 0.2046333102301547, -0.10520152309796396, -1.2851498105581256, 0.11502121452082804, 1.4620952500450504, 0.4454484761905]
 t_wo_start_pos: [0.951, 0.223, 1.557]
-t_wo_start_quat: [0.4418, -0.0446,  0.0220,  0.8958]  # w, x, y, z
+# t_wo_start_quat: [0.4418, -0.0446,  0.0220,  0.8958]  # w, x, y, z
+t_wo_start_quat: [-0.0446,  0.0220,  0.8958, 0.4418]  # x, y, z, w
 
 t_wo_goal_pos: [0.7, 0.45, 1.607]
-t_wo_goal_quat: [-0.10912217, -0.03777281, -0.004149 ,0.99330174]
+# t_wo_goal_quat: [-0.10912217, -0.03777281, -0.004149 ,0.99330174] # w, x, y, z
+t_wo_goal_quat: [-0.03777281, -0.004149 ,0.99330174, -0.10912217] # x, y, z, w
 
-mesh_file_: package://grasping_point/STEFAN/stl/assembly_without_bottom.stl
+mesh_file_: package://closed_chain_motion_planner/stl/stefan.stl
 debug_file_prefix_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/
+
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_top
+  index: 2

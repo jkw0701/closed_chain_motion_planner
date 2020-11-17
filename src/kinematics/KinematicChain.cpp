@@ -1,6 +1,6 @@
 #include <closed_chain_motion_planner/kinematics/KinematicChain.h>
 
-KinematicChainValidityChecker::KinematicChainValidityChecker(const ompl::base::SpaceInformationPtr &si, grasping_point grp)
+KinematicChainValidityChecker::KinematicChainValidityChecker(const ompl::base::SpaceInformationPtr &si)
     : ompl::base::StateValidityChecker(si)
 {
     robot_model_loader::RobotModelLoader robot_model_loader("robot_description");
@@ -23,36 +23,14 @@ KinematicChainValidityChecker::KinematicChainValidityChecker(const ompl::base::S
     current_state.setJointGroupPositions("hand_top", gpos);
     moveit_scene.is_diff = true;
 
-    scene_pub_ = nh_.advertise<moveit_msgs::PlanningScene>("/planning_scenes_suhan", 1);
-
-    /* Define a box to be attached */
     geometry_msgs::Pose box_pose;
-    box_pose.position.x = 0.69;
-    box_pose.position.y = -0.04;
-    box_pose.position.z = 1.0826;
+    box_pose.position.x = 0.65;
+    box_pose.position.y = 0.0;
+    box_pose.position.z = 1.1;
     box_pose.orientation.w = 1.0;
-    addBox(Eigen::Vector3d(0.36, 0.21, 0.165), box_pose, "sub_table1");
+    addBox(Eigen::Vector3d(0.65, 1.0, 0.2), box_pose, "sub_table");
 
-    geometry_msgs::Pose box_pose2;
-    box_pose2.position.x = 0.465;
-    box_pose2.position.y = -0.505;
-    box_pose2.position.z = 1.0826;
-    box_pose2.orientation.w = 1.0;
-    addBox(Eigen::Vector3d(0.21, 0.16, 0.165), box_pose2, "sub_table2");
-
-    geometry_msgs::Pose box_pose3;
-    box_pose3.position.x = 0.595;
-    box_pose3.position.y = 0.355;
-    box_pose3.position.z = 1.0826;
-    box_pose3.orientation.w = 1.0;
-    addBox(Eigen::Vector3d(0.16, 0.21, 0.165), box_pose3, "sub_table3");
-
-    geometry_msgs::Pose box_pose4;
-    box_pose4.position.x = 0.42;
-    box_pose4.position.y = 0.1;
-    box_pose4.position.z = 1.0826;
-    box_pose4.orientation.w = 1.0;
-    addBox(Eigen::Vector3d(0.21, 0.21, 0.165), box_pose4, "sub_table4");
+    scene_pub_ = nh_.advertise<moveit_msgs::PlanningScene>("/planning_scenes_suhan", 1);
 }
 
 void KinematicChainValidityChecker::setStartStates(const Eigen::Ref<const Eigen::VectorXd> &q)
@@ -61,16 +39,15 @@ void KinematicChainValidityChecker::setStartStates(const Eigen::Ref<const Eigen:
     // std::lock_guard<std::mutex> lg(locker_);
     for (int i = 0; i < arm_names_.size(); i++)
     {
-        const auto & q_seg = q.segment<7>(i*7);
-        std::cout << arm_names_[i] << " " << q_seg.transpose() << std::endl;
-        const robot_model::JointModelGroup* joint_model_group = robot_state.getJointModelGroup(arm_names_[i]);
+        const auto &q_seg = q.segment<7>(i * 7);
+        const robot_model::JointModelGroup *joint_model_group = robot_state.getJointModelGroup(arm_names_[i]);
         robot_state.setJointGroupPositions(joint_model_group, q_seg);
         robot_state.update();
         break;
     }
     moveit_msgs::PlanningScene scene_msg;
     planning_scene->getPlanningSceneMsg(scene_msg);
-    scene_pub_.publish(scene_msg);    
+    scene_pub_.publish(scene_msg);
 }
 
 void KinematicChainValidityChecker::addMeshFromFile(const std::string &file_name, geometry_msgs::Pose pose, const std::string &id)
@@ -94,7 +71,7 @@ void KinematicChainValidityChecker::addMeshFromFile(const std::string &file_name
 
 void KinematicChainValidityChecker::attachObject(const std::string &object_id, const std::string &link_name, const std::string &touch_links)
 {
-    // link name : hand 
+    // link name : hand
     moveit_msgs::AttachedCollisionObject aco;
     aco.object.id = object_id;
     aco.object.operation = moveit_msgs::CollisionObject::ADD;
@@ -103,9 +80,11 @@ void KinematicChainValidityChecker::attachObject(const std::string &object_id, c
     planning_scene->processAttachedCollisionObjectMsg(aco);
     moveit_msgs::PlanningScene scene_msg;
     planning_scene->getPlanningSceneMsg(scene_msg);
-    std::cout << "attach objecct " << std::endl;
-    scene_pub_.publish(scene_msg);
-    std::vector<std::string> collision_list{"panda_left_rightfinger", "panda_left_leftfinger", "panda_top_finger_left_link", "panda_top_finger_right_link", "panda_top_hand"};
+
+    // while (true)
+    //     scene_pub_.publish(scene_msg);
+    // std::vector<std::string> collision_list{"panda_left_rightfinger", "panda_left_leftfinger", "panda_top_finger_left_link", "panda_top_finger_right_link", "panda_top_hand"};
+    std::vector<std::string> collision_list{"panda_left_rightfinger", "panda_left_leftfinger"};
     for (auto link : collision_list)
     {
         acm_->setEntry(object_id, link, true);
@@ -115,7 +94,7 @@ void KinematicChainValidityChecker::attachObject(const std::string &object_id, c
 bool KinematicChainValidityChecker::isValid(const ob::State *state) const
 {
     // return true;
-    Eigen::Map<Eigen::VectorXd> q = *state->as<ob::ConstrainedStateSpace::StateType>(); 
+    Eigen::Map<Eigen::VectorXd> q = *state->as<ob::ConstrainedStateSpace::StateType>();
     return isValidImpl(q);
 }
 
@@ -129,9 +108,9 @@ bool KinematicChainValidityChecker::isValidImpl(const Eigen::Ref<const Eigen::Ve
         robot_state::RobotState robot_state = planning_scene->getCurrentState();
         for (int i = 0; i < arm_names_.size(); i++)
         {
-            const auto & q_seg = q.segment<7>(i*7);
+            const auto &q_seg = q.segment<7>(i * 7);
             // std::cout << arm_names_[i] << " " << q_seg.transpose() << std::endl;
-            const robot_model::JointModelGroup* joint_model_group = robot_state.getJointModelGroup(arm_names_[i]);
+            const robot_model::JointModelGroup *joint_model_group = robot_state.getJointModelGroup(arm_names_[i]);
             robot_state.setJointGroupPositions(joint_model_group, q_seg);
             robot_state.update();
         }
@@ -144,7 +123,7 @@ bool KinematicChainValidityChecker::isValidImpl(const Eigen::Ref<const Eigen::Ve
 }
 void KinematicChainValidityChecker::setArmNames(const std::vector<std::string> &arm_name)
 {
-  arm_names_ = arm_name;  
+    arm_names_ = arm_name;
 }
 
 bool KinematicChainValidityChecker::IKValid(int arm_index, Eigen::Matrix<double, 7, 1> temp_sol)
@@ -162,13 +141,13 @@ bool KinematicChainValidityChecker::IKValid(int arm_index, Eigen::Matrix<double,
     // }
     // moveit_msgs::PlanningScene scene_msg;
     // planning_scene->getPlanningSceneMsg(scene_msg);
-    // scene_pub_.publish(scene_msg);    
+    // scene_pub_.publish(scene_msg);
 
     robot_state::RobotState &robot_state = planning_scene->getCurrentStateNonConst();
     robot_state.setJointGroupPositions(arm_names_[arm_index], temp_sol);
     robot_state.update();
     collision_detection::CollisionRequest req;
-    req.verbose = true;
+    // req.verbose = true;
     req.group_name = arm_names_[arm_index];
     collision_detection::CollisionResult res;
     planning_scene->checkCollision(req, res, robot_state, *acm_);

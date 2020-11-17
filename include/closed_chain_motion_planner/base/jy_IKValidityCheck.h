@@ -49,34 +49,7 @@ public:
         current_state.setJointGroupPositions("panda_top", default_start);
         current_state.update();
 
-        /* Define a box to be attached */
-        geometry_msgs::Pose box_pose;
-        box_pose.position.x = 0.69;
-        box_pose.position.y = -0.04;
-        box_pose.position.z = 1.0826;
-        box_pose.orientation.w = 1.0;
-        addBox(Eigen::Vector3d(0.36, 0.21, 0.165), box_pose, "sub_table1");
-
-        geometry_msgs::Pose box_pose2;
-        box_pose2.position.x = 0.465;
-        box_pose2.position.y = -0.505;
-        box_pose2.position.z = 1.0826;
-        box_pose2.orientation.w = 1.0;
-        addBox(Eigen::Vector3d(0.21, 0.16, 0.165), box_pose2, "sub_table2");
-
-        geometry_msgs::Pose box_pose3;
-        box_pose3.position.x = 0.595;
-        box_pose3.position.y = 0.355;
-        box_pose3.position.z = 1.0826;
-        box_pose3.orientation.w = 1.0;
-        addBox(Eigen::Vector3d(0.16, 0.21, 0.165), box_pose3, "sub_table3");
-
-        geometry_msgs::Pose box_pose4;
-        box_pose4.position.x = 0.42;
-        box_pose4.position.y = 0.1;
-        box_pose4.position.z = 1.0826;
-        box_pose4.orientation.w = 1.0;
-        addBox(Eigen::Vector3d(0.21, 0.21, 0.165), box_pose4, "sub_table4");
+       
     }
 
     void setArmNames(const std::vector<std::string> & arm_names)
@@ -157,7 +130,7 @@ public:
         robot_state.setJointGroupPositions(arm_names_[arm_index], temp_sol);
         robot_state.update();
         collision_detection::CollisionRequest req;
-        req.verbose = true;
+        // req.verbose = true;
         req.group_name = arm_names_[arm_index];
         collision_detection::CollisionResult res;
         planning_scene->checkCollision(req, res, robot_state, *acm_);

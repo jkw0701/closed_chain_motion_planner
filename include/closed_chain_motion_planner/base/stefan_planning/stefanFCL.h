@@ -23,7 +23,8 @@
 #include <fcl/collision.h>
 #include <fcl/distance.h>
 
-#include <closed_chain_motion_planner/kinematics/grasping_point.h>
+#include <yaml-cpp/yaml.h>
+
 typedef fcl::OBBRSS BV;
 typedef fcl::BVHModel<BV> BVHM;
 typedef std::shared_ptr<BVHM> BVHMPtr;
@@ -44,54 +45,45 @@ class stefanFCL
 {
 public:
     BVHMPtr mesh_model_;
-    BoxPtr table_model_[9];
-    fcl::Transform3f table_transform[9];
+    BoxPtr table_model_[6];
+    fcl::Transform3f table_transform[6];
     std::string file_name;
     stefanFCL()
     {
-        file_name = "/home/jiyeong/catkin_ws/src/1_assembly/grasping_point/STEFAN/stl/assembly_without_bottom.stl";
-        // grasping_point grp;
-        // file_name = grp.mesh_file_;
+        ros::NodeHandle node_handle("~");
+        std::string obj_name; // = "dumbbell";
+        node_handle.getParam("obj_name", obj_name);
+        // file_name = yamlnode["mesh_file_"].as<std::string>();
+        file_name = "/home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/stl/" + obj_name + ".stl";
         pcl::PolygonMesh mesh;
         pcl::io::loadPolygonFile(file_name, mesh);
         std::vector<TrianglePlaneData> triangles = buildTriangleData(mesh);
         loadMesh(triangles);
 
-        Eigen::Isometry3d table_t_[9];
-        for (int i = 0; i < 9; i++)
+        Eigen::Isometry3d table_t_[6];
+        for (int i = 0; i < 6; i++)
             table_t_[i].setIdentity();
 
-        table_t_[0].translation() << 0.69, -0.04, 1.0826;
-        table_model_[0] = std::make_shared<Box>(0.36, 0.21, 0.164);
-
-        table_t_[1].translation() << 0.465, -0.505, 1.0826;
-        table_model_[1] = std::make_shared<Box>(0.21, 0.16, 0.164);
-
-        table_t_[2].translation() << 0.595, 0.355, 1.0826;
-        table_model_[2] = std::make_shared<Box>(0.16, 0.21, 0.164);
-            
-        table_t_[3].translation() << 0.42, 0.1, 1.0826;
-        table_model_[3] = std::make_shared<Box>(0.21, 0.21, 0.164);
-
+        table_t_[0].translation() << 0.65, 0.0, 1.1;
+        table_model_[0] = std::make_shared<Box>(0.65, 1.0, 0.2);
         /////////////////////////////////
 
-        table_t_[4].translation() << -0.05, 0.0, 1.0; // 판다 두개 있는쪽
-        table_model_[4] = std::make_shared<Box>(0.1, 1.0, 1.0);
+        table_t_[1].translation() << -0.05, 0.0, 1.0; // 판다 두개 있는쪽
+        table_model_[1] = std::make_shared<Box>(0.1, 1.0, 1.0);
 
-        table_t_[5].translation() << 1.35, 0.0, 1.0; //판다 top 있는쪽
-        table_model_[5] = std::make_shared<Box>(0.1, 1.0, 1.0);
+        table_t_[2].translation() << 1.35, 0.0, 1.0; //판다 top 있는쪽
+        table_model_[2] = std::make_shared<Box>(0.1, 1.0, 1.0);
 
-        table_t_[6].translation() << 0.75, -0.6, 1.0; //right
-        table_model_[6] = std::make_shared<Box>(1.0, 0.1, 2.0);
+        table_t_[3].translation() << 0.75, -0.6, 1.0; //right
+        table_model_[3] = std::make_shared<Box>(1.0, 0.1, 2.0);
 
-        table_t_[7].translation() << 0.75, 0.6, 1.0; //left
-        table_model_[7] = std::make_shared<Box>(1.0, 0.1, 2.0);
+        table_t_[4].translation() << 0.75, 0.6, 1.0; //left
+        table_model_[4] = std::make_shared<Box>(1.0, 0.1, 2.0);
 
+        table_t_[5].translation() << 0.95, 0.0, 1.90; // 천장
+        table_model_[5] = std::make_shared<Box>(1.0, 0.6, 0.1);
 
-        table_t_[8].translation() << 0.95, 0.0, 1.90; // 천장
-        table_model_[8] = std::make_shared<Box>(1.0, 0.6, 0.1);
-
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 6; i++)
             FCLEigenUtils::convertTransform(table_t_[i], table_transform[i]);
     }
     void loadMesh(const std::vector<TrianglePlaneData> &mesh)
@@ -131,7 +123,7 @@ public:
         fcl::Transform3f fcl_transform;
         FCLEigenUtils::convertTransform(mesh_transform, fcl_transform);
 
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 6; i++)
         {
             fcl::collide(mesh_model_.get(), fcl_transform, table_model_[i].get(), table_transform[i], request, result);
             if (result.isCollision())

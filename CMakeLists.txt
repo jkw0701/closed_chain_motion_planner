@@ -76,9 +76,9 @@ link_directories(${Boost_LIBRARY_DIR})
 set(SOURCES
   src/base/jy_ProjectedStateSpace.cpp
   src/base/constraints/ConstrainedPlanningCommon.cpp
-  # src/base/constraints/ik_constraint.cpp
   src/base/constraints/ik_task.cpp
-  # src/base/cost/ik_cost.cpp
+  src/base/jy_GoalLazySamples.cpp
+  
   src/planner/stefanBiPRM.cpp
   src/kinematics/panda_tracik.cpp
   src/kinematics/panda_rbdl.cpp

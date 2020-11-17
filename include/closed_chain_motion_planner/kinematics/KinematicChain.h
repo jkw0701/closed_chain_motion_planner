@@ -33,7 +33,6 @@
 // #include <geometry_msgs/Pose.h>
 // #include <tf/transform_datatypes.h>
 
-#include <closed_chain_motion_planner/kinematics/grasping_point.h>
 #include <ompl/base/ConstrainedSpaceInformation.h>
 
 #include <mutex>
@@ -178,7 +177,7 @@ protected:
 class KinematicChainValidityChecker : public ompl::base::StateValidityChecker // to find valid state space configurations
 {
 public:
-    KinematicChainValidityChecker(const ompl::base::SpaceInformationPtr &si, grasping_point grp);
+    KinematicChainValidityChecker(const ompl::base::SpaceInformationPtr &si);
     bool isValid(const ob::State *state) const override;
     void addMeshFromFile(const std::string & file_name, geometry_msgs::Pose pose, const std::string &id);
     void attachObject(const std::string &object_id, const std::string &link_name, const std::string &touch_links);

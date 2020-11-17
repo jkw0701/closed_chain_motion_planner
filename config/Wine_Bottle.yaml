@@ -1,0 +1,22 @@
+obj_name: Wine_Bottle
+start_joint: [-1.8527363999525313, -1.0747720432510628, 1.363269049315438, -2.4380697284341175, -0.9937157931124094, 2.676367906911556, 2.8898168904357875, 0.820871578696892, 0.11188787222538972, -0.6014175950490477, -2.4028919760139633, 1.7684688398739186, 1.6727653871404007, 1.4299489860373846]
+t_wo_start_pos: [0.45, 0.0, 1.22]
+t_wo_start_quat: [0, 0, 0, 1]  # x, y, z, w
+
+t_wo_goal_pos: [0.55, 0.1, 1.42]
+t_wo_goal_quat: [0, 0, 0, 1]
+
+mesh_file_: package://closed_chain_motion_planner/stl/Wine_Bottle.stl
+fcl_mesh_file_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/stl/Wine_Bottle.stl
+debug_file_prefix_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_right
+  index: 1
+
+
+  # mdp.plan_cartesian_target([0.45, 0.11, 1.40], [0.5, -0.5, 0.5, 0.5], "left")
+# mdp.plan_cartesian_target([0.45, -0.10, 1.32], [-0.5, 0.5, 0.5, 0.5], "right")

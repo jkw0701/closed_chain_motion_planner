@@ -14,7 +14,6 @@
 #include <ompl/base/spaces/constraint/ConstrainedStateSpace.h>
 #include <ompl/base/spaces/constraint/ProjectedStateSpace.h>
 
-#include <closed_chain_motion_planner/kinematics/grasping_point.h>
 #include <closed_chain_motion_planner/kinematics/panda_rbdl.h>
 
 
@@ -22,7 +21,7 @@ using namespace std;
 class KinematicChainConstraint : public ompl::base::Constraint
 {
 public:
-    KinematicChainConstraint(unsigned int links, grasping_point grp) : ompl::base::Constraint(links, 2)
+    KinematicChainConstraint(unsigned int links) : ompl::base::Constraint(links, 2)
     {
         maxIterations = 250;
         lb_ << -2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973;

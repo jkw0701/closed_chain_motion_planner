@@ -1,0 +1,23 @@
+obj_name: dumbbell
+start_joint: [-0.001464288952966375, -0.5420558541535008, 0.007754542016750836, -2.7600035963652623, -0.01380276302276182, 2.2305586932141273, 0.7631756594606433,-0.006207133778678346, -0.3689234817705707, -0.004603226266084845, -2.6122969356471706, -0.001778466751191603, 2.2477198121699504, 0.7947798967623179]
+t_wo_start_pos: [0.65, 0.3, 1.28]
+t_wo_start_quat: [0, 0, 0, 1]  # w, x, y, z
+
+t_wo_goal_pos: [0.65, 0.0, 1.28]
+t_wo_goal_quat: [0, 0, 0, 1]
+
+mesh_file_: package://closed_chain_motion_planner/stl/dumbbell.stl
+fcl_mesh_file_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/stl/dumbbell.stl
+debug_file_prefix_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_top
+  index: 2
+
+
+
+  # mdp.plan_cartesian_target([0.35, 0., 1.38], [1, 0 , 0, 0], "left")
+  # mdp.plan_cartesian_target([0.95, 0., 1.38], [0, 1, 0, 0], "top")

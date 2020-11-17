@@ -12,6 +12,7 @@
 #include <closed_chain_motion_planner/kinematics/panda_model.h>
 #include <closed_chain_motion_planner/base/constraints/ConstraintFunction.h>
 #include <closed_chain_motion_planner/base/jy_ConstrainedValidStateSampler.h>
+#include <closed_chain_motion_planner/base/jy_GoalLazySamples.h>
 #include <closed_chain_motion_planner/planner/stefanBiPRM.h>
 #include <ompl/geometric/planners/rrt/RRTConnect.h>
 #include <ompl/geometric/planners/rrt/RRT.h>
@@ -54,22 +55,31 @@ struct ConstrainedOptions
 class ConstrainedProblem
 {
 public:
-    ConstrainedProblem(ob::StateSpacePtr space_, ChainConstraintPtr constraint_);
+    ConstrainedProblem(ob::StateSpacePtr space_, ChainConstraintPtr constraint_, ConfigPtr config_);
     grasping_point grp;
+    ConfigPtr config;
     void setConstrainedOptions();
     void setStartState();
     void goalSampling();
-    void solveOnce();
+    bool goalSampling(const ob::jy_GoalLazySamples *gls, ob::State *result);
+    void solveOnce(bool goalsampling = false);
+    // void setConfig(ConfigPtr &config)
+    // {
+    //     config_ = std::make_shared<grasping_point>();
+    //     std::cout << "SET CONFIGGGGGGGGGGG" << std::endl;
+    //     config_ = config;
+    // }
+    void setEnvironment();
     void dumpGraph()
     {
         ob::PlannerData data(csi);
         pp->getPlannerData(data);
 
-        std::ofstream graphfile(grp.debug_file_prefix_+ "node_info.graphml");
+        std::ofstream graphfile(config->debug_file_prefix_+ config->obj_name  + "_node_info.graphml");
         data.printGraphML(graphfile);
         graphfile.close();
 
-        std::ofstream graphfile2(grp.debug_file_prefix_ + "graph_info.dot");
+        std::ofstream graphfile2(config->debug_file_prefix_ + config->obj_name  + "_graph_info.dot");
         data.printGraphviz(graphfile2);
         graphfile2.close();
 
@@ -173,10 +183,6 @@ public:
     std::map<std::string, ArmModelPtr> arm_models_;
     jy_ValidStateSamplerPtr valid_sampler_;
 
-    ot::Benchmark *bench;
-    ot::Benchmark::Request request;
-    void setupBenchmark(std::vector<enum PLANNER_TYPE> &planners, const std::string &problem);
-    void runBenchmark();
 protected:
     ompl::RNG rng_;
 };

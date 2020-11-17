@@ -35,7 +35,7 @@ class SceneObject():
     def __init__(self):
         rospack = rospkg.RosPack()
 
-        self.stefan_dir = 'package://grasping_point//STEFAN/stl/assembly_without_bottom.stl'
+        self.stefan_dir = 'package://closed_chain_motion_planner//stl/assembly_without_bottom.stl'
         self.assembly = "assembly"
         self.assembly_pose = geometry_msgs.msg.PoseStamped()
         self.assembly_pose.header.frame_id = "base"

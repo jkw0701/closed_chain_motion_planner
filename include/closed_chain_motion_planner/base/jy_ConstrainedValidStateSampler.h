@@ -108,6 +108,41 @@ public:
         // return si_->isValid(result);
         return true;
     }
+
+    bool sampleRandomGoal(Isometry3d base_obj, ob::State *result)
+    {
+        std::lock_guard<std::mutex> _(graphMutex_);        
+        // IKvc_->moveOBJ("stefan", base_obj);
+        Eigen::Map<Eigen::VectorXd> &sol = *result->as<ob::ConstrainedStateSpace::StateType>();       
+                
+        ik_task_->setTargetPose(base_obj);
+        ik_task_->setSigma(sigma_);
+
+        for (int i = 0; i < 2; i++)
+        {
+            bool success = false;    
+            int arm_idx = arm_models_[arm_names_[i]]->index;            
+            ik_task_->setArmName(arm_names_[i]);
+            // std::cout << "set arm name to "<< arm_names_[i] << std::endl;
+            // std::cout << q0_.segment<7>(i * 7).transpose() << std::endl;
+
+            Eigen::VectorXd temp_sol(7);
+            int iter = 15;
+            double prev = std::numeric_limits<double>::infinity();
+            while (--iter)
+            {          
+                if (_randomsolveCalibIK(i, temp_sol))
+                {
+                    sol.segment<7>(i * 7) = temp_sol;
+                    success = true;                    
+                }
+            }
+            if (!success)
+                return false;
+        }
+        // return si_->isValid(result);
+        return true;
+    }
     
     bool sampleCalibGoal(Isometry3d base_obj, ob::State *start_state, ob::State *result)
     {

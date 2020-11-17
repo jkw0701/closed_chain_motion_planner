@@ -53,21 +53,6 @@ stefanBiPRM::stefanBiPRM(const ompl::base::SpaceInformationPtr &si, const ompl::
 
     // obj_space_ = std::make_shared<ob::SE3StateSpace>();
     obj_space_ = tsi_->getStateSpace()->as<ob::CompoundStateSpace>()->getSubspace(1);
-    double delta = 0.075;
-
-    // ob::RealVectorBounds bounds(3);
-
-    // Eigen::Vector3d startt = StateEigenUtils::StateToIsometry(obj_start_).translation();
-    // Eigen::Vector3d goalt = StateEigenUtils::StateToIsometry(obj_goal_).translation();
-
-    // bounds.setLow(0, std::min(startt[0], goalt[0]) - delta);
-    // bounds.setHigh(0, std::max(startt[0], goalt[0]) + delta);
-    // bounds.setLow(1, std::min(startt[1], goalt[1]) - delta);
-    // bounds.setHigh(1, std::max(startt[1], goalt[1]) + delta);
-    // bounds.setLow(2, std::min(startt[2], goalt[2]) - delta + 0.05);
-    // bounds.setHigh(2, std::max(startt[2], goalt[2]) + delta + 0.1);
-    // obj_space_->setBounds(bounds);
-    
     obj_sampler_ = obj_space_->allocStateSampler();
 
     stefan_checker_ = std::make_shared<stefanFCL>();

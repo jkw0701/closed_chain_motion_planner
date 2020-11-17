@@ -252,7 +252,6 @@ public:
 
     std::normal_distribution<> normalDist_{0, 1};
     std::mt19937 generator_;
-    grasping_point grp_;
 
     // ob::Cost closestFromGoal(bool start, Vertex &closest);
     ompl::base::Cost closestFromGoal(std::vector<Vertex> froms, std::vector<Vertex> tos, Vertex &closest);
