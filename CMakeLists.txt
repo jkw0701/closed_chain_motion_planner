@@ -30,12 +30,11 @@ find_package(PythonLibs 2.7 REQUIRED)
 
 find_package(PCL 1.8 REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(RBDL REQUIRED)
+# find_package(RBDL REQUIRED)
 # find_package(Boost COMPONENTS program_options REQUIRED system)
 find_package(ompl REQUIRED)
-find_package(fcl REQUIRED)
+find_package(fcl QUIET)
 find_package(shape_msgs REQUIRED)
-
 
 catkin_package(
   CATKIN_DEPENDS
@@ -50,7 +49,7 @@ catkin_package(
   INCLUDE_DIRS  #which is neede to indicate the include path
     include
     ${catkin_INCLUDE_DIRS}
-    # "/home/jiyeong/catkin_ws/devel/include" 
+    # "/home/keunwoo/catkin_ws/devel/include" 
     ${OMPL_INCLUDE_DIRS}
   DEPENDS
     EIGEN3
@@ -63,7 +62,7 @@ include_directories(
     /usr/include/eigen3 
     /usr/include/boost 
     /usr/local/include/ompl
-    ${RBDL_INCLUDE_DIRS}
+    # ${RBDL_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${OMPL_INCLUDE_DIRS}
     ${PCL_INCLUDE_DIRS}
@@ -74,15 +73,17 @@ add_definitions(${PCL_DEFINITIONS})
 link_directories(${Boost_LIBRARY_DIR})
 
 set(SOURCES
-  src/base/jy_ProjectedStateSpace.cpp
+  src/base/constraints/jy_ProjectedStateSpace.cpp
   src/base/constraints/ConstrainedPlanningCommon.cpp
   src/base/constraints/ik_task.cpp
   src/base/jy_GoalLazySamples.cpp
   
+  src/planner/RRTConnect.cpp
+  src/planner/RRTSE3.cpp
   src/planner/stefanBiPRM.cpp
   src/kinematics/panda_tracik.cpp
   src/kinematics/panda_rbdl.cpp
-  src/kinematics/grasping_point.cpp
+  src/kinematics/planner_config.cpp
   src/kinematics/KinematicChain.cpp
   )
 

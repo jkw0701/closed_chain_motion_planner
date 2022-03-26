@@ -1,0 +1,22 @@
+obj_name: Milk_1L
+start_joint: [-0.27171551963960067, -0.04508754114147904, -0.30545512989902424, -2.010906404495768, -0.033493813957252615, 1.9831751834227411, 1.7601208986046077, 0.08521283452358523, 0.1901777963358818, 0.14397360190105685, -2.389104202564482, 1.7325823719574516, 1.7281463335537373, 1.3347929158281986]
+t_wo_start_pos: [0.45, 0.0, 1.21]
+t_wo_start_quat: [0, 0, 0, 1]  # x, y, z, w
+
+t_wo_goal_pos: [0.5, -0.2, 1.32]
+t_wo_goal_quat: [0, 0, -0.258819, 0.9659258]
+
+mesh_file_: package://closed_chain_motion_planner/stl/Milk_1L.stl
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/Milk_1L.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_right
+  index: 1
+
+
+  # mdp.plan_cartesian_target([0.45, 0.0, 1.48], [-0.7071, 0.7071, 0, 0], "left")
+  # mdp.plan_cartesian_target([0.45, -0.10, 1.28], [-0.5, 0.5, 0.5, 0.5], "right")

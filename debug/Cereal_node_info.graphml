@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="key0" for="node" attr.name="coords" attr.type="string" />
+  <key id="key1" for="edge" attr.name="weight" attr.type="double" />
+  <graph id="G" edgedefault="directed" parse.nodeids="free" parse.edgeids="canonical" parse.order="nodesfirst">
+    <node id="n0">
+      <data key="key0">-2.06819,-1.69966,1.41717,-2.42115,0.682317,2.85774,1.58383,-0.117106,0.0929218,-0.0975955,-2.40369,1.38784,1.44961,1.42181</data>
+    </node>
+    <node id="n1">
+      <data key="key0">-1.65952,-1.33344,1.06248,-2.29786,0.572154,2.9448,1.17487,0.114499,0.57859,0.0919608,-1.25455,1.39791,1.27814,2.0835</data>
+    </node>
+    <node id="n2">
+      <data key="key0">-1.43552,-1.66007,0.952163,-2.61208,0.497524,2.62192,1.1985,0.197957,-0.0165059,0.0846161,-2.25447,1.60105,1.52139,1.72969</data>
+    </node>
+    <edge id="e0" source="n1" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e1" source="n2" target="n1">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e2" source="n0" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e3" source="n2" target="n0">
+      <data key="key1">1</data>
+    </edge>
+  </graph>
+</graphml>

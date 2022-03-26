@@ -1,0 +1,22 @@
+obj_name: Beer
+start_joint: [-0.45019799144944794, 0.04314769186118471, 0.23031174821911787, -2.4844192980290187, 2.8538880471902885, 2.1894448547010286, 0.9087355490609863, 0.08278521523548889, 0.519492286905485, 0.06930466984026488, -1.2725977717371126, -0.03699012629063642, 1.7977022210932452, 0.9602561514653729]
+t_wo_start_pos: [0.65, 0.2, 1.22]
+t_wo_start_quat: [0, 0, -0.7071068, 0.7071068 ]  # x, y, z, w
+
+t_wo_goal_pos: [0.65, 0.1, 1.40]
+t_wo_goal_quat: [0, 0, -0.8660254, 0.5 ]
+
+mesh_file_: package://closed_chain_motion_planner/stl/Beer.stl
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/Beer.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_top
+  index: 2
+
+
+  # mdp.plan_cartesian_target([0.48, 0.2, 1.3], [0, 0.7071, 0, 0.7071], "left")
+  # mdp.plan_cartesian_target([0.65, 0.2, 1.46], [0, 1, 0, 0], "top")

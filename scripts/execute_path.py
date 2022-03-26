@@ -131,11 +131,9 @@ if __name__ == '__main__':
             rospy.spin()
         
         obj_info = SceneObject()
-        path_name = "/home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/" + obj_info.obj_name + "_path.txt"
+        path_name = "/home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/" + obj_info.obj_name + "_path.txt"
         start_joint , robot_trajectory = obj_info.execute_path(mdp, path_name, 2.5)
         
-        mdp.scene.add_mesh(obj_info.obj_name, obj_info.pose, obj_info.mesh_dir)
-        rospy.sleep(3)
         
         joint_1 = []
         joint_2 = []
@@ -149,8 +147,9 @@ if __name__ == '__main__':
         mdp.plan_joint_target(joint_1, "left")
         mdp.plan_joint_target(joint_2, "right")
         mdp.plan_joint_target(joint_3, "top")
-        rospy.sleep(3)
-        
+        rospy.sleep(1)
+        mdp.scene.add_mesh(obj_info.obj_name, obj_info.pose, obj_info.mesh_dir)
+        rospy.sleep(2)
         mdp.scene.attach_mesh("panda_left_link8", obj_info.obj_name, touch_links=touch_links)
-        rospy.sleep(3)
+        rospy.sleep(10)
         mdp.group_123.execute(robot_trajectory)

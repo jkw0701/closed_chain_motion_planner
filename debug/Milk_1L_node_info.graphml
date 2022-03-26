@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="key0" for="node" attr.name="coords" attr.type="string" />
+  <key id="key1" for="edge" attr.name="weight" attr.type="double" />
+  <graph id="G" edgedefault="directed" parse.nodeids="free" parse.edgeids="canonical" parse.order="nodesfirst">
+    <node id="n0">
+      <data key="key0">-0.271716,-0.0450875,-0.305455,-2.01091,-0.0334938,1.98318,1.76012,0.0852128,0.190178,0.143974,-2.3891,1.73258,1.72815,1.33479</data>
+    </node>
+    <node id="n1">
+      <data key="key0">-0.626903,0.772661,-0.409794,-0.554705,0.255591,1.32079,1.96463,-0.109158,-0.19364,-0.0323806,-2.55138,1.80689,1.86781,1.53689</data>
+    </node>
+    <node id="n2">
+      <data key="key0">-0.907897,-0.431231,0.914961,-1.71801,-0.487852,1.04898,0.979831,0.488109,0.282816,0.163966,-1.63549,1.45706,1.19348,2.88631</data>
+    </node>
+    <node id="n3">
+      <data key="key0">0.865886,-0.858426,-0.316857,-1.67274,-0.659775,1.43229,2.46482,-0.572228,-0.269846,1.14596,-1.67578,1.61242,2.0181,1.83218</data>
+    </node>
+    <node id="n4">
+      <data key="key0">-0.867083,-0.604627,0.657728,-2.35221,-0.454734,1.46419,0.881816,-0.172331,0.17757,0.726651,-2.29468,1.31884,1.17775,2.40747</data>
+    </node>
+    <node id="n5">
+      <data key="key0">-0.941347,-0.471138,0.889393,-1.76792,-0.46722,1.13776,0.96384,0.435373,0.272231,0.182027,-1.64777,1.40597,1.16728,2.85736</data>
+    </node>
+    <edge id="e0" source="n0" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e1" source="n2" target="n0">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e2" source="n1" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e3" source="n2" target="n1">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e4" source="n1" target="n3">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e5" source="n3" target="n1">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e6" source="n3" target="n4">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e7" source="n4" target="n3">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e8" source="n4" target="n5">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e9" source="n5" target="n4">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e10" source="n5" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e11" source="n2" target="n5">
+      <data key="key1">1</data>
+    </edge>
+  </graph>
+</graphml>

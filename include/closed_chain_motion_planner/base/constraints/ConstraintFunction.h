@@ -21,7 +21,7 @@ using namespace std;
 class KinematicChainConstraint : public ompl::base::Constraint
 {
 public:
-    KinematicChainConstraint(unsigned int links) : ompl::base::Constraint(links, 2)
+    KinematicChainConstraint(unsigned int links) : ompl::base::Constraint(links, 1)
     {
         maxIterations = 250;
         lb_ << -2.8973, -1.7628, -2.8973, -3.0718, -2.8973, -0.0175, -2.8973;
@@ -54,32 +54,32 @@ public:
         return true;
     }
 
-    bool project(Eigen::Ref<Eigen::VectorXd> x) const override
-    {
-        // Newton's method
-        unsigned int iter = 0;
-        double norm1 = 0;
-        double norm2 = 0;
-        double norm3 = 0;
-        double norm4 = 0;
-        Eigen::VectorXd f(getCoDimension());
-        Eigen::MatrixXd j(getCoDimension(), n_);
-        function(x, f);
-        while ( ( (norm1 = f[0] > tolerance1_)  || (norm2 = f[1]) > tolerance2_ ) && iter++ < maxIterations)
-        {
-            jacobian(x, j);
-            x -= 0.30 * j.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV).solve(f);
-            function(x, f);
-        }
+    // bool project(Eigen::Ref<Eigen::VectorXd> x) const override
+    // {
+    //     // Newton's method
+    //     unsigned int iter = 0;
+    //     double norm1 = 0;
+    //     double norm2 = 0;
+    //     double norm3 = 0;
+    //     double norm4 = 0;
+    //     Eigen::VectorXd f(getCoDimension());
+    //     Eigen::MatrixXd j(getCoDimension(), n_);
+    //     function(x, f);
+    //     while ( ( (norm1 = f[0] > tolerance1_)  || (norm2 = f[1]) > tolerance2_ ) && iter++ < maxIterations_)
+    //     {
+    //         jacobian(x, j);
+    //         x -= 1.0 * j.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV).solve(f);
+    //         function(x, f);
+    //     }
         
-        if (jointValid(x) && (norm1 < tolerance1_) && (norm2 < tolerance2_))
-        {
-            // OMPL_INFORM("ITER : %d  / norm1 : %f  / norm2 : %f  "  , iter, norm1, norm2);
-            return true;
-        }
-        else    
-            return false;
-    }
+    //     if (jointValid(x) && (norm1 < tolerance1_) && (norm2 < tolerance2_))
+    //     {
+    //         // OMPL_INFORM("ITER : %d  / norm1 : %f  / norm2 : %f  "  , iter, norm1, norm2);
+    //         return true;
+    //     }
+    //     else    
+    //         return false;
+    // }
 
     void function(const Eigen::Ref<const Eigen::VectorXd> &x, Eigen::Ref<Eigen::VectorXd> out) const override
     {
@@ -97,27 +97,27 @@ public:
         double err_r = current_quat.angularDistance(init_quat);
         double err_p = (current_chain.translation() - init_chain_.translation()).norm();
         
-        out[0] = err_p ;
-        out[1] = err_r;
+        out[0] = err_p + err_r;
+        // out[1] = err_r;
     }    
     
-    void setTolerance(const double tolerance1, const double tolerance2)
-    {
-        if (tolerance1 <= 0 || tolerance2 <= 0)
-            throw ompl::Exception("ompl::base::Constraint::setProjectionTolerance(): "
-                                  "tolerance must be positive.");
-        tolerance1_ = tolerance1;
-        tolerance2_ = tolerance2;
-        // OMPL_INFORM("Set tolerance to %f and %f", tolerance1_, tolerance2_);
-    }
+    // void setTolerance(const double tolerance1, const double tolerance2)
+    // {
+    //     if (tolerance1 <= 0 || tolerance2 <= 0)
+    //         throw ompl::Exception("ompl::base::Constraint::setProjectionTolerance(): "
+    //                               "tolerance must be positive.");
+    //     tolerance1_ = tolerance1;
+    //     tolerance2_ = tolerance2;
+    //     // OMPL_INFORM("Set tolerance to %f and %f", tolerance1_, tolerance2_);
+    // }
 
-    bool isSatisfied(const Eigen::Ref<const Eigen::VectorXd> &x) const override
-    {
-        Eigen::VectorXd f(getCoDimension());
-        function(x, f);
-        // std::cout << f.transpose() << std::endl;
-        return f.allFinite() && f[0] <= tolerance1_ && f[1] <= tolerance2_;
-    }
+    // bool isSatisfied(const Eigen::Ref<const Eigen::VectorXd> &x) const override
+    // {
+    //     Eigen::VectorXd f(getCoDimension());
+    //     function(x, f);
+    //     // std::cout << f.transpose() << std::endl;
+    //     return f.allFinite() && f[0] <= tolerance1_ && f[1] <= tolerance2_;
+    // }
 
     void setArmModels(const ArmModelPtr & arm1, const ArmModelPtr & arm2)
     {

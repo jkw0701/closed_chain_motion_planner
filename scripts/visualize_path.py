@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
     
     smp = SuhanMotionPlannerManager(sys.argv)
-    path_name = "/home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/_path.txt"
+    path_name = "/home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/_path.txt"
     stefan = SceneObject()
     smp.planner.add_collision_mesh(stefan.stefan_dir, np.array([stefan.assembly_pose.pose.position.x, stefan.assembly_pose.pose.position.y, stefan.assembly_pose.pose.position.z]), np.array(
         [stefan.assembly_pose.pose.orientation.x, stefan.assembly_pose.pose.orientation.y, stefan.assembly_pose.pose.orientation.z, stefan.assembly_pose.pose.orientation.w]), "assembly")

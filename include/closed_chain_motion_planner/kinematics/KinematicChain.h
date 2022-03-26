@@ -216,6 +216,7 @@ protected:
     ros::Publisher scene_pub_;
     ros::NodeHandle nh_;
     std::vector<std::string> arm_names_;
+    std::mutex graphMutex_;
 };
 
 

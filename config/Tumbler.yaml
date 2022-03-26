@@ -1,0 +1,22 @@
+obj_name: Tumbler
+start_joint: [-1.913554262043418, -1.5273301072445786, 1.5362221034845793, -2.531072175423095, -0.121800493047389, 2.9016627881886143, 2.3874673358308063, 0.07479788914447591, 0.18482493589981816, 0.13085700913154089, -2.3967051101427597, 1.7148895712728824, 1.7145012147910565, 1.3348058770637132]
+t_wo_start_pos: [0.45, 0.0, 1.21]
+t_wo_start_quat: [0, 0, 0, 1]  # x, y, z, w
+
+t_wo_goal_pos: [0.60, 0.2, 1.22]
+t_wo_goal_quat: [0, 0, 0, 1]
+
+mesh_file_: package://closed_chain_motion_planner/stl/Tumbler.stl
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/Tumbler.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_right
+  index: 1
+
+
+  # mdp.plan_cartesian_target([0.45, 0.11, 1.35], [0.5, -0.5, 0.5, 0.5], "left")
+  # mdp.plan_cartesian_target([0.45, -0.11, 1.28], [-0.5, 0.5, 0.5, 0.5], "right")

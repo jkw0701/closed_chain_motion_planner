@@ -3,12 +3,12 @@ start_joint: [-0.001464288952966375, -0.5420558541535008, 0.007754542016750836, 
 t_wo_start_pos: [0.65, 0.3, 1.28]
 t_wo_start_quat: [0, 0, 0, 1]  # w, x, y, z
 
-t_wo_goal_pos: [0.65, 0.0, 1.28]
+t_wo_goal_pos: [0.65, -0.08, 1.28] ##[0.65, 0.0, 1.28]
 t_wo_goal_quat: [0, 0, 0, 1]
 
 mesh_file_: package://closed_chain_motion_planner/stl/dumbbell.stl
-fcl_mesh_file_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/stl/dumbbell.stl
-debug_file_prefix_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/dumbbell.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
 
 arm1:
   name: panda_left

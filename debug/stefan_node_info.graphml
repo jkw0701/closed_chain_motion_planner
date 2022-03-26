@@ -3,5 +3,62 @@
   <key id="key0" for="node" attr.name="coords" attr.type="string" />
   <key id="key1" for="edge" attr.name="weight" attr.type="double" />
   <graph id="G" edgedefault="directed" parse.nodeids="free" parse.edgeids="canonical" parse.order="nodesfirst">
+    <node id="n0">
+      <data key="key0">-0.166614,-0.766118,-0.0336987,-2.37255,-0.09888,1.69277,0.174408,0.406483,0.204633,-0.105202,-1.28515,0.115021,1.4621,0.445448</data>
+    </node>
+    <node id="n1">
+      <data key="key0">-0.0142581,0.29985,-0.968887,-1.26635,0.313929,1.50033,-1.73795,0.169865,0.398799,-0.13966,-0.840837,0.0558497,1.16635,-0.919821</data>
+    </node>
+    <node id="n2">
+      <data key="key0">-0.16521,-0.246144,-0.230874,-1.5283,-0.426564,1.50118,-0.486844,0.370325,0.00191276,-0.0722976,-1.24115,0.375537,1.38057,0.20362</data>
+    </node>
+    <node id="n3">
+      <data key="key0">-0.228082,0.15261,-0.402757,-0.975617,-0.136571,1.17126,-0.744969,0.456475,-0.0916211,0.0130746,-1.42414,0.0920206,1.49576,0.247636</data>
+    </node>
+    <node id="n4">
+      <data key="key0">-0.0634479,-0.0935902,-0.39062,-1.57156,-0.137604,1.6141,-0.61217,0.394134,-0.274999,-0.0695762,-1.68354,0.107364,1.40963,0.0259812</data>
+    </node>
+    <edge id="e0" source="n1" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e1" source="n2" target="n1">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e2" source="n2" target="n3">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e3" source="n3" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e4" source="n1" target="n3">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e5" source="n3" target="n1">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e6" source="n3" target="n4">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e7" source="n4" target="n3">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e8" source="n2" target="n4">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e9" source="n4" target="n2">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e10" source="n0" target="n4">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e11" source="n4" target="n0">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e12" source="n1" target="n4">
+      <data key="key1">1</data>
+    </edge>
+    <edge id="e13" source="n4" target="n1">
+      <data key="key1">1</data>
+    </edge>
   </graph>
 </graphml>

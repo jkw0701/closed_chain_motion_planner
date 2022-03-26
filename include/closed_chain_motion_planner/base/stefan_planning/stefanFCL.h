@@ -45,23 +45,22 @@ class stefanFCL
 {
 public:
     BVHMPtr mesh_model_;
-    BoxPtr table_model_[6];
-    fcl::Transform3f table_transform[6];
+    BoxPtr table_model_[7];
+    fcl::Transform3f table_transform[7];
     std::string file_name;
     stefanFCL()
     {
-        ros::NodeHandle node_handle("~");
-        std::string obj_name; // = "dumbbell";
-        node_handle.getParam("obj_name", obj_name);
-        // file_name = yamlnode["mesh_file_"].as<std::string>();
-        file_name = "/home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/stl/" + obj_name + ".stl";
+        // ros::NodeHandle node_handle("~");
+        std::string obj_name = "dumbbell";
+        // node_handle.getParam("obj_name", obj_name);
+        file_name = "/home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/" + obj_name + ".stl";
         pcl::PolygonMesh mesh;
         pcl::io::loadPolygonFile(file_name, mesh);
         std::vector<TrianglePlaneData> triangles = buildTriangleData(mesh);
         loadMesh(triangles);
 
-        Eigen::Isometry3d table_t_[6];
-        for (int i = 0; i < 6; i++)
+        Eigen::Isometry3d table_t_[7];
+        for (int i = 0; i < 7; i++)
             table_t_[i].setIdentity();
 
         table_t_[0].translation() << 0.65, 0.0, 1.1;
@@ -83,7 +82,11 @@ public:
         table_t_[5].translation() << 0.95, 0.0, 1.90; // 천장
         table_model_[5] = std::make_shared<Box>(1.0, 0.6, 0.1);
 
-        for (int i = 0; i < 6; i++)
+
+        table_t_[6].translation() << 0.65, 0.1, 1.3; // obstacle
+        table_model_[6] = std::make_shared<Box>(0.5, 0.08, 0.1);
+
+        for (int i = 0; i < 7; i++)
             FCLEigenUtils::convertTransform(table_t_[i], table_transform[i]);
     }
     void loadMesh(const std::vector<TrianglePlaneData> &mesh)
@@ -123,7 +126,7 @@ public:
         fcl::Transform3f fcl_transform;
         FCLEigenUtils::convertTransform(mesh_transform, fcl_transform);
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 7; i++)
         {
             fcl::collide(mesh_model_.get(), fcl_transform, table_model_[i].get(), table_transform[i], request, result);
             if (result.isCollision())

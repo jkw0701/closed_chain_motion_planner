@@ -15,7 +15,7 @@
 #include <ompl/base/spaces/SE3StateSpace.h>
 #include <ompl/base/ConstrainedSpaceInformation.h>
 #include <closed_chain_motion_planner/kinematics/KinematicChain.h>
-#include <closed_chain_motion_planner/base/jy_ConstrainedValidStateSampler.h>
+#include <closed_chain_motion_planner/base/constraints/jy_ConstrainedValidStateSampler.h>
 #include <closed_chain_motion_planner/base/stefan_planning/stefanFCL.h>
 #include <closed_chain_motion_planner/base/utils.h>
 #include <ompl/base/goals/GoalState.h>
@@ -154,6 +154,7 @@ public:
         return boost::num_edges(g_);
     }
 
+
     // bool isSatisfied(const ob::State *st) const;
     std::shared_ptr<std::vector<Vertex>> startM_, goalM_;
     bool addedNewSolution_{false};
@@ -163,8 +164,10 @@ public:
 
     ompl::base::Cost distFromGoal, distFromStart;
     void freeMemory();
-    GrowState growTree();
+    GrowState growTree(const base::PlannerTerminationCondition &ptc);
     GrowState growTree(ob::State *obj_state_);
+    void expandRoadmap(const base::PlannerTerminationCondition &ptc);
+    void expandRoadmap(const base::PlannerTerminationCondition &ptc, std::vector<base::State *> &workStates);
 
     Vertex addMilestone(ompl::base::State *state);
     Vertex startgoalMilestone(ompl::base::State *tstate);

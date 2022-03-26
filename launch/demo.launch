@@ -1,9 +1,13 @@
 <launch>
+    <arg name="debug" default="false"/>
+    <arg unless="$(arg debug)" name="launch_prefix" value=""/>
+    <arg if="$(arg debug)" name="launch_prefix" value="gdb --ex run --args"/>
+
     <param name="robot_description" command="$(find xacro)/xacro '$(find assembly_env_description)/robots/assembly_env.urdf.xacro'" />
     <!-- <include file="$(find triple_moveit_config)/launch/planning_context.launch"/> -->
     
-    <node name="closed_chain_motion_planner" pkg="closed_chain_motion_planner" type="closed_chain_motion_planner" output="screen">  
-        <param name="obj_name" type="str" value="Wine_Bottle" />
+    <node name="closed_chain_motion_planner" launch-prefix="$(arg launch_prefix)" pkg="closed_chain_motion_planner" type="closed_chain_motion_planner" output="screen">  
+        <param name="obj_name" value="dumbbell" type="str"/>
     </node>
 </launch>
 

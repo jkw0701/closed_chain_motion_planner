@@ -85,6 +85,15 @@ class MoveGroupPlanner():
         self.box_pose.pose.position.z = 1.1
         self.scene.add_box("table", self.box_pose, size=(0.65, 1.0, 0.2))
         
+        self.obstacle = geometry_msgs.msg.PoseStamped()
+        self.obstacle.header.frame_id = "base"
+        self.obstacle.pose.orientation.w = 1.0
+        self.obstacle.pose.position.x = 0.65
+        self.obstacle.pose.position.y = 0.1
+        self.obstacle.pose.position.z = 1.3
+        self.scene.add_box("obstacle", self.obstacle, size=(0.5, 0.08, 0.1))
+        
+
         rospy.sleep(1)
         self.active_controllers = []
     # geometry_msgs.msg.Pose() or self.group.get_current_joint_values()

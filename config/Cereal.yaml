@@ -1,0 +1,22 @@
+obj_name: Cereal
+start_joint: [-2.0681929256881997, -1.6996619047400627, 1.4171667432011708, -2.421145261989058, 0.6823168430745506, 2.857737542866339, 1.583832093082134, -0.11710581949597385, 0.09292183486980284, -0.09759545364273008, -2.4036878714427132, 1.3878407003940632, 1.4496082155414651, 1.4218121355989604]
+t_wo_start_pos: [0.45, -0.1, 1.22]
+t_wo_start_quat: [0, 0, 0, 1]  # x, y, z, w
+
+t_wo_goal_pos: [0.55, 0.1, 1.42]
+t_wo_goal_quat: [ 0, 0, 0.258819, 0.9659258]
+
+mesh_file_: package://closed_chain_motion_planner/stl/Cereal.stl
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/Cereal.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_right
+  index: 1
+
+
+# mdp.plan_cartesian_target([0.45, 0.08, 1.45], [0.5, -0.5, 0.5, 0.5], "left")
+# mdp.plan_cartesian_target([0.45, -0.28, 1.32], [-0.5, 0.5, 0.5, 0.5], "right")

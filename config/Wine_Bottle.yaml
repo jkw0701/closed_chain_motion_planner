@@ -7,8 +7,8 @@ t_wo_goal_pos: [0.55, 0.1, 1.42]
 t_wo_goal_quat: [0, 0, 0, 1]
 
 mesh_file_: package://closed_chain_motion_planner/stl/Wine_Bottle.stl
-fcl_mesh_file_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/stl/Wine_Bottle.stl
-debug_file_prefix_: /home/jiyeong/catkin_ws/src/2_social/closed_chain_motion_planner/debug/
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/Wine_Bottle.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
 
 arm1:
   name: panda_left

@@ -1,0 +1,21 @@
+obj_name: Basket
+start_joint: [0.007285485601432996, -0.12498630241421149, -0.0004670500449896911, -1.9518459436018987, -0.016878345108942993, 1.8409973064666343, -0.8042549961487868,-0.004848538281427876, 0.0285714387012444, -0.006375513936173072, -1.7628657323715415, 0.0011406269906775886, 1.7966907417458666, -0.7731738249690964]
+t_wo_start_pos: [0.67, 0.3, 1.21]
+t_wo_start_quat: [0, 0, 0, 1]  # w, x, y, z
+
+t_wo_goal_pos: [0.65, 0.0, 1.21]
+t_wo_goal_quat: [ 0, 0, 0.258819, 0.9659258 ]
+
+mesh_file_: package://closed_chain_motion_planner/stl/Basket.stl
+fcl_mesh_file_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/stl/Basket.stl
+debug_file_prefix_: /home/keunwoo/catkin_ws/src/closed_chain_motion_planner/debug/
+
+arm1:
+  name: panda_left
+  index: 0
+arm2:
+  name: panda_top
+  index: 2
+
+# mdp.plan_cartesian_target([0.52, 0.3, 1.54], [0.7071, 0.7071, 0, 0], "left")
+# mdp.plan_cartesian_target([0.78, 0.3, 1.54], [-0.7071, 0.7071, 0, 0], "top")
